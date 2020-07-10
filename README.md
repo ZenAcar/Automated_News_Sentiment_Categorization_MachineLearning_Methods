@@ -8,7 +8,7 @@
 Zen Acar, Gina Cameras, Harini Rao, Carlos Santillan
 
 ## Topic
-Our team will create an app that analyzes sentiment for news articles. The user will be able to interact with the app by choosing negative or positive articles and select categories from a drop-down menu.
+Our team will create an app that analyzes sentiment for news articles. The user will be able to interact with the app by choosing negative or positive articles and selecting categories from a drop-down menu.
 
 ## Dataset
 * Training dataset: https://www.kaggle.com/c/word2vec-nlp-tutorial/data?select=testData.tsv.zip
