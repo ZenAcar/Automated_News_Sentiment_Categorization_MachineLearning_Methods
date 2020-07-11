@@ -1,0 +1,15 @@
+DROP TABLE IF EXISTS "NewsData";
+
+CREATE TABLE "NewsData" (
+	"Source" VARCHAR NOT NULL,
+	"Category" VARCHAR NOT NULL,
+	"Author" VARCHAR NOT NULL,
+	"Title" VARCHAR NOT NULL,
+	"Description" VARCHAR NOT NULL,
+	"URL" VARCHAR NOT NULL,
+	"Image_URL" TEXT NOT NULL,
+	"Date" Date NOT NULL,
+	"Content" VARCHAR NOT NULL,
+	"Summary" VARCHAR NOT NULL,
+	"Sentiment" VARCHAR NOT NULL,
+);
