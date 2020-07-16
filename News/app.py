@@ -27,29 +27,29 @@ access_key =  os.environ.get('ACCESS_KEY', '')
 secret_key =  os.environ.get('SECRET_KEY', '')
 
 print(f'a {access_key}')
-print(f'b {secret_key}')
+print(f'b {}')
 
-session = boto3.session.Session(aws_access_key_id=access_key, aws_secret_access_key=secret_key, region_name=region_name)
-client = session.client('secretsmanager')
-secret_value = client.get_secret_value(SecretId=secret_name)
-def get_connection(secret_value):
-  return json.loads(secret_value['SecretString'])
-connection = get_connection(secret_value)
-# Postgres credentials
-jdbcHostname = connection['host']
-jdbcPort = connection['port']
-jdbcDatabase = "postgres"
-dialect = "postgresql"
-jdbcUsername = connection['username']
-jdbcPassword = connection['password']
-jdbcUrl = f"jdbc:{dialect}://{jdbcHostname}:{jdbcPort}/{jdbcDatabase}"
-connectionProperties = {
-  "user" : jdbcUsername,
-  "password" : jdbcPassword,
-  "driver" : "org.postgresql.Driver" 
-}
+# session = boto3.session.Session(aws_access_key_id=access_key, aws_secret_access_key=secret_key, region_name=region_name)
+# client = session.client('secretsmanager')
+# secret_value = client.get_secret_value(SecretId=secret_name)
+# def get_connection(secret_value):
+#   return json.loads(secret_value['SecretString'])
+# connection = get_connection(secret_value)
+# # Postgres credentials
+# jdbcHostname = connection['host']
+# jdbcPort = connection['port']
+# jdbcDatabase = "postgres"
+# dialect = "postgresql"
+# jdbcUsername = connection['username']
+# jdbcPassword = connection['password']
+# jdbcUrl = f"jdbc:{dialect}://{jdbcHostname}:{jdbcPort}/{jdbcDatabase}"
+# connectionProperties = {
+#   "user" : jdbcUsername,
+#   "password" : jdbcPassword,
+#   "driver" : "org.postgresql.Driver" 
+# }
 
-print(jdbcUrl)
+# print(jdbcUrl)
 
 
 from flask_sqlalchemy import SQLAlchemy
