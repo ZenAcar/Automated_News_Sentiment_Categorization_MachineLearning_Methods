@@ -71,19 +71,19 @@ def home():
     return render_template("index.html")
 
 
-@app.route("/census_data/")
-def census_data():
-    results = db.session.query(census.state, census.variable, census.value).order_by(census.state,census.variable).all()
-    census_data = []
-    for result in results:
-        census_data.append({
-            'state': result[0],
-            'year':result[1],
-            'value':result[2]
-        })
+# @app.route("/census_data/")
+# def census_data():
+#     results = db.session.query(census.state, census.variable, census.value).order_by(census.state,census.variable).all()
+#     census_data = []
+#     for result in results:
+#         census_data.append({
+#             'state': result[0],
+#             'year':result[1],
+#             'value':result[2]
+#         })
    
-    # print(jsonify(census_data))
-    return jsonify(census_data)
+#     # print(jsonify(census_data))
+#     return jsonify(census_data)
 
 
 # @app.route("/api/states")
