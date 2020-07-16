@@ -26,6 +26,9 @@ region_name = "us-east-2"
 access_key =  os.environ.get('ACCESS_KEY', '')
 secret_key =  os.environ.get('SECRET_KEY', '')
 
+print(f'a {access_key}')
+print(f'b {secret_key}')
+
 session = boto3.session.Session(aws_access_key_id=access_key, aws_secret_access_key=secret_key, region_name=region_name)
 client = session.client('secretsmanager')
 secret_value = client.get_secret_value(SecretId=secret_name)
