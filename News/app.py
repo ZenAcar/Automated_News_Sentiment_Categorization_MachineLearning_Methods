@@ -23,8 +23,8 @@ print(sys.path)
 
 secret_name = "proj/3/db"
 region_name = "us-east-2"
-access_key = "AKIA2U5PXWUPEETMAONL"
-secret_key = "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"
+access_key = ""
+secret_key = ""
 
 session = boto3.session.Session(aws_access_key_id=access_key, aws_secret_access_key=secret_key, region_name=region_name)
 client = session.client('secretsmanager')
