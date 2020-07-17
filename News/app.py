@@ -21,35 +21,6 @@ print(sys.path)
 # Database Setup
 #################################################
 
-secret_name = "proj/3/db"
-region_name = "us-east-2"
-access_key =  os.environ.get('ACCESS_KEY', '')
-secret_key =  os.environ.get('SECRET_KEY', '')
-
-print(f'a {access_key}')
-print(f'b {secret_key}')
-
-# session = boto3.session.Session(aws_access_key_id=access_key, aws_secret_access_key=secret_key, region_name=region_name)
-# client = session.client('secretsmanager')
-# secret_value = client.get_secret_value(SecretId=secret_name)
-# def get_connection(secret_value):
-#   return json.loads(secret_value['SecretString'])
-# connection = get_connection(secret_value)
-# # Postgres credentials
-# jdbcHostname = connection['host']
-# jdbcPort = connection['port']
-# jdbcDatabase = "postgres"
-# dialect = "postgresql"
-# jdbcUsername = connection['username']
-# jdbcPassword = connection['password']
-# jdbcUrl = f"jdbc:{dialect}://{jdbcHostname}:{jdbcPort}/{jdbcDatabase}"
-# connectionProperties = {
-#   "user" : jdbcUsername,
-#   "password" : jdbcPassword,
-#   "driver" : "org.postgresql.Driver" 
-# }
-
-# print(jdbcUrl)
 
 
 from flask_sqlalchemy import SQLAlchemy
@@ -71,7 +42,41 @@ except ImportError:
 
 @app.route("/")
 def home():
+    databaseconnection()
     return render_template("index.html")
+
+def get_connection(secret_value):
+    return json.loads(secret_value['SecretString'])
+
+
+def databaseconnection():
+    secret_name = "proj/3/db"
+    region_name = "us-east-2"
+    access_key =  os.environ.get('ACCESS_KEY', '')
+    secret_key =  os.environ.get('SECRET_KEY', '')
+
+    print(f'a {access_key}')
+    print(f'b {secret_key}')
+
+    session = boto3.session.Session(aws_access_key_id=access_key, aws_secret_access_key=secret_key, region_name=region_name)
+    client = session.client('secretsmanager')
+    secret_value = client.get_secret_value(SecretId=secret_name)
+    connection = get_connection(secret_value)
+    # Postgres credentials
+    jdbcHostname = connection['host']
+    jdbcPort = connection['port']
+    jdbcDatabase = "postgres"
+    dialect = "postgresql"
+    jdbcUsername = connection['username']
+    jdbcPassword = connection['password']
+    jdbcUrl = f"jdbc:{dialect}://{jdbcHostname}:{jdbcPort}/{jdbcDatabase}"
+    connectionProperties = {
+    "user" : jdbcUsername,
+    "password" : jdbcPassword,
+    "driver" : "org.postgresql.Driver" 
+    }
+
+    print(jdbcUrl)
 
 
 # @app.route("/census_data/")
