@@ -57,7 +57,7 @@ def databaseconnection():
 
     print(f'a {access_key}')
     print(f'b {secret_key}')
-
+    sys.stdout.flush()
     session = boto3.session.Session(aws_access_key_id=access_key, aws_secret_access_key=secret_key, region_name=region_name)
     client = session.client('secretsmanager')
     secret_value = client.get_secret_value(SecretId=secret_name)
