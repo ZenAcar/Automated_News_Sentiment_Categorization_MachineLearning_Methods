@@ -65,8 +65,6 @@ idna==2.7
 imagecodecs==2020.5.30
 imageio==2.9.0
 imagesize==1.2.0
-importlib==1.0.4
-importlib-metadata==1.7.0
 intervaltree==3.0.2
 isodate==0.6.0
 isort==4.3.21
