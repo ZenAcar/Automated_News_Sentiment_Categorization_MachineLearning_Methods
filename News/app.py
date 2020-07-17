@@ -34,13 +34,27 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-# from .models import census
-try:
-    # Assume we're a sub-module in a package.
-    from .models import *
-    #from .models import *
-except ImportError:
-     from models import *
+
+class sentiment_results(db.Model):
+    """Data model for user accounts."""
+
+    __tablename__ = 'sentiment_results'
+    id = db.Column(db.Integer, primary_key=True   )
+    title = db.Column(db.String(64), index=False,unique=True, nullable=False )
+    url = db.Column(db.String(64), index=False,unique=True, nullable=False )
+    urlToImage    = db.Column(db.String(64), index=False,unique=True, nullable=False )
+    publishedAt = db.Column(db.DateTime, index=False,unique=True, nullable=False )
+    articleSummary    = db.Column(db.String(64), index=False,unique=True, nullable=False )
+    articleSentiment    = db.Column(db.String(200), index=False,unique=True, nullable=False )
+    category    = db.Column(db.String(64), index=False,unique=True, nullable=False )
+# # from .models import census
+# try:
+#     # Assume we're a sub-module in a package.
+#     from .models import *
+#     #from .models import *
+# except ImportError:
+#     print("why are we hree?")
+#     from models import *
 
 
 @app.route("/")
