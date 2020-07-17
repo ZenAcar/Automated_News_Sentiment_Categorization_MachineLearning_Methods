@@ -30,7 +30,39 @@ function buildUrl(url, parameters){
     return url;
   }
 
-  
+  function tabulate(data, columns) {
+    var table = d3.select('#contNews').append('table')
+    var thead = table.append('thead')
+    var	tbody = table.append('tbody');
+
+    // append the header row
+    thead.append('tr')
+      .selectAll('th')
+      .data(columns).enter()
+      .append('th')
+        .text(function (column) { return column; });
+
+    // create a row for each object in the data
+    var rows = tbody.selectAll('tr')
+      .data(data)
+      .enter()
+      .append('tr');
+
+    // create a cell in each row for each column
+    var cells = rows.selectAll('td')
+      .data(function (row) {
+        return columns.map(function (column) {
+          return {column: column, value: row[column]};
+        });
+      })
+      .enter()
+      .append('td')
+        .text(function (d) { return d.value; });
+
+  return table;
+}
+
+
 async function getnews()
 {
     selectedDate = d3.select("#selDate").node().value;
@@ -48,34 +80,9 @@ async function getnews()
     const url = buildUrl('/news_data/',parameters);
     newsdata = await d3.json(url);
 
+    tabulate(newsdata,['title','url'])
 
-    // table = d3.select("#contNews").node().append('table');
-    // var thead = table.append('thead')
-    // var	tbody = table.append('tbody');
-
-    // // append the header row
-    // thead.append('tr')
-    //   .selectAll('th')
-    //   .data(columns).enter()
-    //   .append('th')
-    //     .text(function (column) { return column; });
-
-    // // create a row for each object in the data
-    // var rows = tbody.selectAll('tr')
-    //   .data(newsdata)
-    //   .enter()
-    //   .append('tr');
-
-    // // create a cell in each row for each column
-    // var cells = rows.selectAll('td')
-    //   .data(function (row) {
-    //     return columns.map(function (column) {
-    //       return {column: column, value: row[column]};
-    //     });
-    //   })
-    //   .enter()
-    //   .append('td')
-    //     .text(function (d) { return d.value; });
+    
 
 }
 

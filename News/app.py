@@ -73,23 +73,6 @@ def databaseconnection():
     DATABASE_URL = os.environ['DATABASE_URL']
     print(DATABASE_URL)
 
-@app.route("/test/")
-def test():
-
-    results = db.session.query(sentiment_results.title,publishedAt.url,sentiment_results.articleSentiment,sentiment_results.articleSummary).limit(5).all()
-    news_data = []
-    for result in results:
-        #print ("here")
-        #print(result)
-        news_data.append({
-            'Title':result[0],
-            'url':result[1],
-            'sentiment':result[2],
-            'summary':result[3]
-
-        })
-        
-    return jsonify(news_data)    
 
 @app.route("/news_dates/")
 def news_dates():
@@ -98,7 +81,7 @@ def news_dates():
     news_data = []
     for result in results:
         #print ("here")
-        print(result)
+        #print(result)
         news_data.append({
             'date':result[0].strftime('%Y/%m/%d')
         })
@@ -112,18 +95,20 @@ def news_data():
     sentiment  = request.args.get('sentiment', None)
     limit  = request.args.get('limit', None)
 
-    print(f'{adate} {category} {sentiment}')
+    print(f'{adate} {category} {sentiment} {limit}')
 
     # print(db.session.query(sentiment_results.articleSummary, sentiment_results.url).filter(sentiment_results.category==category,                                sentiment_results.articleSentiment==sentiment,                                sentiment_results.publishedAt==adate))
-    results = db.session.query(sentiment_results.articleSummary, sentiment_results.url).filter(sentiment_results.category==category).limit(limit).all()
+    results = db.session.query(sentiment_results.title, sentiment_results.url).filter(sentiment_results.category==category,
+                                func.date(sentiment_results.publishedAt)==func.date(adate)
+                                ).limit(limit).all()
                                 # sentiment_results.articleSentiment==sentiment,
                                 #sentiment_results.publishedAt==adate).all()
     news_data = []
     for result in results:
-        print(result)
+        print(result[0])
         news_data.append({
-            'summary':result[0],
-            'url':result[0]
+            'title':result[0],
+            'url':result[1]
         })
         
     return jsonify(news_data)
