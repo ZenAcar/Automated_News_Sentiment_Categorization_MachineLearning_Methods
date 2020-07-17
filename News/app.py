@@ -77,7 +77,7 @@ def databaseconnection():
     # "driver" : "org.postgresql.Driver" 
     # }
 
-    print(jdbcUrl)
+    # print(jdbcUrl)
 
 
 # @app.route("/census_data/")
