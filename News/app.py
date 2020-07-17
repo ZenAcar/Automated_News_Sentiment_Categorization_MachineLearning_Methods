@@ -12,6 +12,10 @@ from flask import (
     jsonify,
     request,send_file,
     redirect)
+from sqlalchemy import cast, Date
+from sqlalchemy.sql import func
+from sqlalchemy import desc
+
 
 #################################################
 # Flask Setup
@@ -40,15 +44,15 @@ class sentiment_results(db.Model):
 
     __tablename__ = 'sentiment_results'
     id = db.Column(db.Integer, primary_key=True)
-    author = db.Column(db.String(64), index=False,unique=True, nullable=False )
-    title = db.Column(db.String(64), index=False,unique=True, nullable=False )
-    description = db.Column(db.String(64), index=False,unique=True, nullable=False )
-    url = db.Column(db.String(64), index=False,unique=True, nullable=False )
-    urlToImage    = db.Column(db.String(64), index=False,unique=True, nullable=False )
-    publishedAt = db.Column(db.DateTime, index=False,unique=True, nullable=False )
-    articleSummary    = db.Column(db.String(200), index=False,unique=True, nullable=False )
-    articleSentiment    = db.Column(db.String(64), index=False,unique=True, nullable=False )
-    category    = db.Column(db.String(64), index=False,unique=True, nullable=False )
+    author = db.Column(db.String(64), index=False )
+    title = db.Column(db.String(64), index=False)
+    description = db.Column(db.String(64) , index=False)
+    url = db.Column(db.String(64), index=False )
+    urlToImage    = db.Column(db.String(64), index=False )
+    publishedAt = db.Column(db.DateTime, index=False )
+    articleSummary    = db.Column(db.String(200), index=False )
+    articleSentiment    = db.Column(db.String(64), index=False)
+    category    = db.Column(db.String(64), index=False )
 # # from .models import census
 # try:
 #     # Assume we're a sub-module in a package.
@@ -72,7 +76,7 @@ def databaseconnection():
 @app.route("/test/")
 def test():
 
-    results = db.session.query(sentiment_results.title,sentiment_results.url,sentiment_results.articleSentiment,sentiment_results.articleSummary).limit(5).all()
+    results = db.session.query(sentiment_results.title,publishedAt.url,sentiment_results.articleSentiment,sentiment_results.articleSummary).limit(5).all()
     news_data = []
     for result in results:
         #print ("here")
@@ -85,26 +89,44 @@ def test():
 
         })
         
+    return jsonify(news_data)    
+
+@app.route("/news_dates/")
+def news_dates():
+    print ("here")
+    results = db.session.query(cast(sentiment_results.publishedAt,Date)).distinct().order_by(func.DATE(sentiment_results.publishedAt)).all()
+    news_data = []
+    for result in results:
+        #print ("here")
+        print(result)
+        news_data.append({
+            'date':result[0].strftime('%Y/%m/%d')
+        })
+        news_data.reverse()
     return jsonify(news_data)
 
+@app.route("/news_data/")
+def news_data():
+    adate = request.args.get('date', None)
+    category  = request.args.get('category', None)
+    sentiment  = request.args.get('sentiment', None)
+    limit  = request.args.get('limit', None)
 
-    
-# @app.route("/census_data/")
-# def census_data():
-#     results = db.session.query(census.state, census.variable, census.value).order_by(census.state,census.variable).all()
-#     census_data = []
-#     for result in results:
-#         census_data.append({
-#             'state': result[0],
-#             'year':result[1],
-#             'value':result[2]
-#         })
-   
-#     # print(jsonify(census_data))
-#     return jsonify(census_data)
+    print(f'{adate} {category} {sentiment}')
 
-
-  
+    # print(db.session.query(sentiment_results.articleSummary, sentiment_results.url).filter(sentiment_results.category==category,                                sentiment_results.articleSentiment==sentiment,                                sentiment_results.publishedAt==adate))
+    results = db.session.query(sentiment_results.articleSummary, sentiment_results.url).filter(sentiment_results.category==category).limit(limit).all()
+                                # sentiment_results.articleSentiment==sentiment,
+                                #sentiment_results.publishedAt==adate).all()
+    news_data = []
+    for result in results:
+        print(result)
+        news_data.append({
+            'summary':result[0],
+            'url':result[0]
+        })
+        
+    return jsonify(news_data)
 
 if __name__ == "__main__":
     app.jinja_env.auto_reload = True

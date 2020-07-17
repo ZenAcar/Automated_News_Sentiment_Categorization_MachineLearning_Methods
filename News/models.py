@@ -16,7 +16,7 @@ class sentiment_results(db.Model):
     title = db.Column(db.String(64), index=False,unique=True, nullable=False )
     url = db.Column(db.String(64), index=False,unique=True, nullable=False )
     urlToImage    = db.Column(db.String(64), index=False,unique=True, nullable=False )
-    publishedAt = db.Column(db.String(64), index=False,unique=True, nullable=False )
+    publishedAt = db.Column(db.DateTime, index=False,unique=True, nullable=False )
     articleSummary    = db.Column(db.String(64), index=False,unique=True, nullable=False )
     articleSentiment    = db.Column(db.String(200), index=False,unique=True, nullable=False )
     category    = db.Column(db.String(64), index=False,unique=True, nullable=False )
