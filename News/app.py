@@ -43,17 +43,17 @@ class sentiment_results(db.Model):
     """Data model for user accounts."""
 
     __tablename__ = 'sentiment_results'
-    id      = db.Column(db.Integer, primary_key=True)
-    author  = db.Column(db.String(64), index=False )
-    title   = db.Column(db.String(64), index=False)
-    description = db.Column(db.String(64) , index=False)
-    url     = db.Column(db.String(64), index=False )
-    urlToImage    = db.Column(db.String(64), index=False )
-    publishedAt = db.Column(db.DateTime, index=False )
-    articleSummary    = db.Column(db.String(200), index=False )
-    articleSentiment    = db.Column(db.String(64), index=False)
-    category        = db.Column(db.String(64), index=False )
-    source      = db.Column(db.String(64), index=False )
+    index      = db.Column(db.Integer, primary_key=True)
+    author  = db.Column('author',db.String, unique=False,index=False )
+    title   = db.Column('title', db.String, unique=False,index=False)
+    description = db.Column('description',db.String , unique=False,index=False)
+    url     = db.Column('url',db.String, unique=False,index=False )
+    urlToImage    = db.Column('urltoimage',db.String,unique=False, index=False )
+    publishedAt = db.Column('publishedat',db.DateTime, unique=False,index=False )
+    articleSummary    = db.Column('articlesummary',db.String,unique=False, index=False )
+    articleSentiment    = db.Column('articlesentiment',db.String, unique=False,index=False)
+    category        = db.Column('category',db.String, unique=False,index=False )
+    source      = db.Column('source',db.String, unique=False,index=False )
 
 # # from .models import census
 # try:
@@ -63,7 +63,6 @@ class sentiment_results(db.Model):
 # except ImportError:
 #     print("why are we hree?")
 #     from models import *
-
 
 @app.route("/")
 def home():
@@ -92,23 +91,28 @@ def news_data():
     sentiment  = request.args.get('sentiment', None)
     limit  = request.args.get('limit', None)
 
-    print(f'{adate} {category} {sentiment} {limit}')
 
-    # print(db.session.query(sentiment_results.articleSummary, sentiment_results.url).filter(sentiment_results.category==category,                                sentiment_results.articleSentiment==sentiment,                                sentiment_results.publishedAt==adate))
     results = db.session.query( sentiment_results.title, 
                                 sentiment_results.url,
-                                sentiment_results.articleSummary,
-                                sentiment_results.source
+                                # sentiment_results.articleSummary,
+                                sentiment_results.source,
+                                sentiment_results.category,
+                                sentiment_results.articleSentiment
                                 ).filter(
-                                    sentiment_results.category==category,
-                                    #sentiment_results.articleSentiment==sentiment,
-                                    func.date(sentiment_results.publishedAt)==func.date(adate)
-                                ).limit(limit).all()
-                
+                                    sentiment_results.category==category
+                                ).limit(int(limit)).all()
 
+# .filter(
+# #                                    sentiment_results.articleSentiment==sentiment,
+#                                     sentiment_results.category==category
+#                                    # func.date(sentiment_results.publishedAt)==func.date(adate)
+#                                 )                                
+                
+    print("Here ")
     news_data = []
     for result in results:
         print(result[0])
+        print(result[4])
         news_data.append({
             'title':result[0],
             'url':result[1],
