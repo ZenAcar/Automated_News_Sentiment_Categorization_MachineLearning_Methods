@@ -20,7 +20,7 @@
 /* Footer */
 
 .footer {
-    position: absolute;
+    position: fixed;
     height: 70px;
     right: 0;
     bottom: 0;
@@ -38,3 +38,25 @@
 .footer ul li {
     display: inline;
 }
+
+
+/* .footer {
+    position: fixed;
+    height: 70px;
+    right: 0;
+    margin-bottom: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    text-align: center;
+    color: #f1eef6;
+    background: linear-gradient( #034e7b, black);
+}
+
+.footer ul {
+    list-style: none;
+}
+
+.footer ul li {
+    display: inline;
+} */
