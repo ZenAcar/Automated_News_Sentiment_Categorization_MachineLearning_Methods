@@ -67,13 +67,8 @@ class sentiment_results(db.Model):
 
 @app.route("/")
 def home():
-    databaseconnection()
     return render_template("index.html")
     
-
-def databaseconnection():
-    DATABASE_URL = os.environ['DATABASE_URL']
-    print(DATABASE_URL)
 
 
 @app.route("/news_dates/")
@@ -110,6 +105,7 @@ def news_data():
                                     func.date(sentiment_results.publishedAt)==func.date(adate)
                                 ).limit(limit).all()
                 
+
     news_data = []
     for result in results:
         print(result[0])
