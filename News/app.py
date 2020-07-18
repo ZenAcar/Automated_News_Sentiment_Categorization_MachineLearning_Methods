@@ -94,9 +94,9 @@ def news_data():
 
     results = db.session.query( sentiment_results.title, 
                                 sentiment_results.url,
-                                # sentiment_results.articleSummary,
+                                sentiment_results.articleSummary,
                                 sentiment_results.source,
-                                sentiment_results.category,
+                                #sentiment_results.category,
                                 sentiment_results.articleSentiment
                                 ).filter(
                                     sentiment_results.category==category
@@ -118,6 +118,7 @@ def news_data():
             'url':result[1],
             'summary':result[2],
             'source':result[3]
+
         })
         
     return jsonify(news_data)

@@ -80,7 +80,7 @@ async function getnews() {
     const url = buildUrl('/news_data/', parameters);
     newsdata = await d3.json(url);
 
-    tabulate(newsdata, ['title', 'url'])
+    tabulate(newsdata, ['title', 'url', 'summary', 'source'])
 
 
 
