@@ -55,20 +55,10 @@ class sentiment_results(db.Model):
     category        = db.Column('category',db.String, unique=False,index=False )
     source      = db.Column('source',db.String, unique=False,index=False )
 
-# # from .models import census
-# try:
-#     # Assume we're a sub-module in a package.
-#     from .models import *
-#     #from .models import *
-# except ImportError:
-#     print("why are we hree?")
-#     from models import *
 
 @app.route("/")
 def home():
     return render_template("index.html")
-    
-
 
 @app.route("/news_dates/")
 def news_dates():
@@ -90,29 +80,23 @@ def news_data():
     category  = request.args.get('category', None)
     sentiment  = request.args.get('sentiment', None)
     limit  = request.args.get('limit', None)
-
+    print(f'{adate} {category} {sentiment} {limit}')
 
     results = db.session.query( sentiment_results.title, 
                                 sentiment_results.url,
                                 sentiment_results.articleSummary,
                                 sentiment_results.source,
-                                #sentiment_results.category,
                                 sentiment_results.articleSentiment
                                 ).filter(
-                                    sentiment_results.category==category
+                                    sentiment_results.category==category,  
+                                    sentiment_results.articleSentiment==sentiment,
+                                    func.date(sentiment_results.publishedAt)==func.date(adate)
                                 ).limit(int(limit)).all()
 
-# .filter(
-# #                                    sentiment_results.articleSentiment==sentiment,
-#                                     sentiment_results.category==category
-#                                    # func.date(sentiment_results.publishedAt)==func.date(adate)
-#                                 )                                
-                
-    print("Here ")
     news_data = []
     for result in results:
-        print(result[0])
-        print(result[4])
+        # print(result[0])
+        # print(result[4])
         news_data.append({
             'title':result[0],
             'url':result[1],
