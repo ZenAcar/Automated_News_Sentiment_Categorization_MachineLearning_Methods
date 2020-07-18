@@ -13,7 +13,7 @@ Zen Acar, Gina Cameras, Harini Rao, Carlos Santillan
 * The idea behind a sentiment-driven news app is to allow the user to explore the news in their way, having full control of whether they see positive or negative news.
 
 ## Datasets
-* Training dataset: kaggle.com/rmisra/news-category-dataset
+* Training dataset: https://www.kaggle.com/rmisra/news-category-dataset
   - Sentiment derived from Vader Sentiment(pypi.org/project/vaderSentiment/)
   - 200,000 articles from Huffington post
   - Years: 2012 to 2018
