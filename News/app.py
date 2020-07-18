@@ -100,17 +100,24 @@ def news_data():
     print(f'{adate} {category} {sentiment} {limit}')
 
     # print(db.session.query(sentiment_results.articleSummary, sentiment_results.url).filter(sentiment_results.category==category,                                sentiment_results.articleSentiment==sentiment,                                sentiment_results.publishedAt==adate))
-    results = db.session.query(sentiment_results.title, sentiment_results.url).filter(sentiment_results.category==category,
-                                func.date(sentiment_results.publishedAt)==func.date(adate)
+    results = db.session.query( sentiment_results.title, 
+                                sentiment_results.url,
+                                sentiment_results.articleSummary,
+                                sentiment_results.source
+                                ).filter(
+                                    sentiment_results.category==category,
+                                    #sentiment_results.articleSentiment==sentiment,
+                                    func.date(sentiment_results.publishedAt)==func.date(adate)
                                 ).limit(limit).all()
-                                # sentiment_results.articleSentiment==sentiment,
-                                #sentiment_results.publishedAt==adate).all()
+                
     news_data = []
     for result in results:
         print(result[0])
         news_data.append({
             'title':result[0],
-            'url':result[1]
+            'url':result[1],
+            'summary':result[2],
+            'source':result[3]
         })
         
     return jsonify(news_data)
