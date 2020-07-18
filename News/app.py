@@ -43,16 +43,18 @@ class sentiment_results(db.Model):
     """Data model for user accounts."""
 
     __tablename__ = 'sentiment_results'
-    id = db.Column(db.Integer, primary_key=True)
-    author = db.Column(db.String(64), index=False )
-    title = db.Column(db.String(64), index=False)
+    id      = db.Column(db.Integer, primary_key=True)
+    author  = db.Column(db.String(64), index=False )
+    title   = db.Column(db.String(64), index=False)
     description = db.Column(db.String(64) , index=False)
-    url = db.Column(db.String(64), index=False )
+    url     = db.Column(db.String(64), index=False )
     urlToImage    = db.Column(db.String(64), index=False )
     publishedAt = db.Column(db.DateTime, index=False )
     articleSummary    = db.Column(db.String(200), index=False )
     articleSentiment    = db.Column(db.String(64), index=False)
-    category    = db.Column(db.String(64), index=False )
+    category        = db.Column(db.String(64), index=False )
+    source      = db.Column(db.String(64), index=False )
+
 # # from .models import census
 # try:
 #     # Assume we're a sub-module in a package.
