@@ -1,17 +1,19 @@
 
 # Analyze Sentiment for News Articles using Machine Learning
 
-#### Presentation: [coming soon]
-#### App Link: [coming soon]
+#### Presentation: https://docs.google.com/presentation/d/1CRPUC-MkgJLwPZqTE8rZi3HWnFWFKVDB2DJdAUJ-4YM/edit#slide=id.g8c4c5f6443_0_86
+#### App Link: https://datavizards-news.herokuapp.com/
 
 ## Team
 Zen Acar, Gina Cameras, Harini Rao, Carlos Santillan
 
 ## Topic
-Our team will create an app that analyzes sentiment for news articles. The user will be able to interact with the app by choosing negative or positive articles and selecting categories from a drop-down menu.
+* Created a web-based app that delivers news by sentiment and category where sentiment is informed by a sentiment detection ML model.
+* The idea behind a sentiment-driven news app is to allow the user to explore the news in their way, having full control of whether they see positive or negative news.
 
 ## Dataset
-* Training dataset: https://www.kaggle.com/c/word2vec-nlp-tutorial/data?select=testData.tsv.zip
+* Training dataset: kaggle.com/rmisra/news-category-dataset
+  - Sentiment derived from Vader Sentiment(pypi.org/project/vaderSentiment/)
 * Testing dataset: https://newsapi.org/
 
 ## GitHub Repository
