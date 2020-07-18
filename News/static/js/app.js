@@ -1,4 +1,3 @@
-
 function loadDropDown(dropPick, columns, defaultOptionName) {
     // Support function to used to load drop down 
     let selectOpt = d3.select(dropPick);
@@ -17,72 +16,73 @@ function loadDropDown(dropPick, columns, defaultOptionName) {
 }
 
 
-function buildUrl(url, parameters){
+function buildUrl(url, parameters) {
     var qs = "";
-    for(var key in parameters) {
-      var value = parameters[key];
-      qs += encodeURIComponent(key) + "=" + encodeURIComponent(value) + "&";
+    for (var key in parameters) {
+        var value = parameters[key];
+        qs += encodeURIComponent(key) + "=" + encodeURIComponent(value) + "&";
     }
-    if (qs.length > 0){
-      qs = qs.substring(0, qs.length-1); //chop off last "&"
-      url = url + "?" + qs;
+    if (qs.length > 0) {
+        qs = qs.substring(0, qs.length - 1); //chop off last "&"
+        url = url + "?" + qs;
     }
     return url;
-  }
+}
 
-  function tabulate(data, columns) {
+function tabulate(data, columns) {
+    d3.selectAll("table").remove();
     var table = d3.select('#contNews').append('table')
     var thead = table.append('thead')
-    var	tbody = table.append('tbody');
+    var tbody = table.append('tbody');
 
     // append the header row
     thead.append('tr')
-      .selectAll('th')
-      .data(columns).enter()
-      .append('th')
-        .text(function (column) { return column; });
+        .selectAll('th')
+        .data(columns).enter()
+        .append('th')
+        .text(function(column) { return column; });
 
     // create a row for each object in the data
     var rows = tbody.selectAll('tr')
-      .data(data)
-      .enter()
-      .append('tr');
+        .data(data)
+        .enter()
+        .append('tr');
 
     // create a cell in each row for each column
     var cells = rows.selectAll('td')
-      .data(function (row) {
-        return columns.map(function (column) {
-          return {column: column, value: row[column]};
-        });
-      })
-      .enter()
-      .append('td')
-        .text(function (d) { return d.value; });
+        .data(function(row) {
+            return columns.map(function(column) {
+                return { column: column, value: row[column] };
+            });
+        })
+        .enter()
+        .append('td')
+        .text(function(d) { return d.value; });
 
-  return table;
+    return table;
 }
 
 
-async function getnews()
-{
+async function getnews() {
     selectedDate = d3.select("#selDate").node().value;
     selectedCategory = d3.select("#selCategory").node().value;
     selectedSentiment = d3.select("#selSentiment").node().value;
     selectedLimit = d3.select("#selLimit").node().value;
 
-    const parameters={
-        'date':selectedDate,
-        'category':selectedCategory.toLowerCase() ,
-        'sentiment':selectedSentiment,
-        'limit':selectedLimit
+    const parameters = {
+        'date': selectedDate,
+        'category': selectedCategory.toLowerCase(),
+        'sentiment': selectedSentiment,
+        'limit': selectedLimit
     }
-    //const url = '/news_data/?date=${selectedDate}&category=${selectedCategory}&sentiment=${selectedSentiment}';
-    const url = buildUrl('/news_data/',parameters);
+    console.log(parameters)
+        //const url = '/news_data/?date=${selectedDate}&category=${selectedCategory}&sentiment=${selectedSentiment}';
+    const url = buildUrl('/news_data/', parameters);
     newsdata = await d3.json(url);
 
-    tabulate(newsdata,['title','url'])
+    tabulate(newsdata, ['title', 'url'])
 
-    
+
 
 }
 
@@ -101,17 +101,17 @@ function loadLimit() {
 
 function loadCategories() {
     // Load theYears dropdown
-    let columns = ['Business','Entertainment','General','Health','Science','Sports','Technology']
+    let columns = ['Business', 'Entertainment', 'General', 'Health', 'Science', 'Sports', 'Technology']
     loadDropDown('#selCategory', columns, columns[0])
 }
 
 function loadnewsDates(newsdates) {
     // Load theYears dropdown
     function strDes(a, b) {
-        if (a>b) return -1;
-        else if (a<b) return 1;
+        if (a > b) return -1;
+        else if (a < b) return 1;
         else return 0;
-      }    
+    }
     let columns = []
     newsdates.forEach(element => {
         columns.push(element.date)
@@ -134,4 +134,3 @@ async function init() {
 }
 
 init();
-
