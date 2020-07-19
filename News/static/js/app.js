@@ -71,7 +71,7 @@ function generateDynamicTable(data, columns,headers){
                     var td = document.createElement("td");
                     let cell_content=''
                     if (j ==0 ){
-                        cell_content = '<a href="' + data[i]['url']+'">'+data[i][columns[j]]+'</a>' ;
+                        cell_content = '<a href="' + data[i]['url']+'" target="_blank" >'+data[i][columns[j]]+'</a>' ;
                     }
                     else
                     {
