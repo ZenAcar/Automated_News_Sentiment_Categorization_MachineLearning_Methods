@@ -30,66 +30,63 @@ function buildUrl(url, parameters) {
 }
 
 
-function generateDynamicTable(data, sentiment, columns,headers){
-	
+function generateDynamicTable(data, sentiment, columns, headers) {
+
     var noOfRecords = data.length;
     d3.select('#contNews').selectAll("table").remove(); // Only remove tables under conNews    
 
-    var table = document.createElement("table");        
+    var table = document.createElement("table");
     table.style.width = '80%';
     table.setAttribute('border', '1');
     table.setAttribute('cellspacing', '0');
     table.setAttribute('cellpadding', '5');
 
     // CREATE TABLE HEAD .
-    var tHead = document.createElement("thead");	
+    var tHead = document.createElement("thead");
     // CREATE ROW FOR TABLE HEAD .
     var hRow = document.createElement("tr");
-    
+
     // ADD COLUMN HEADER TO ROW OF TABLE HEAD.
     for (var i = 0; i < headers.length; i++) {
-            var th = document.createElement("th");
-            if (i < headers.length -1){
-            th.setAttribute('width','45%')
-            }
-            else{
-                th.setAttribute('width','10%')
-            }
-            th.innerHTML = headers[i];
-            hRow.appendChild(th);
+        var th = document.createElement("th");
+        if (i < headers.length - 1) {
+            th.setAttribute('width', '45%')
+        } else {
+            th.setAttribute('width', '10%')
+        }
+        th.innerHTML = headers[i];
+        hRow.appendChild(th);
     }
     tHead.appendChild(hRow);
-    table.appendChild(tHead);		
-        // CREATE TABLE BODY .
-    if(noOfRecords>0){
-            // CREATE DYNAMIC TABLE.
-            
-        var tBody = document.createElement("tbody");	
+    table.appendChild(tHead);
+    // CREATE TABLE BODY .
+    if (noOfRecords > 0) {
+        // CREATE DYNAMIC TABLE.
+
+        var tBody = document.createElement("tbody");
         for (var i = 0; i < noOfRecords; i++) {
-        
-                var bRow = document.createElement("tr"); // CREATE ROW FOR EACH RECORD .
-                for (var j = 0; j < columns.length; j++) {
-                    var td = document.createElement("td");
-                    let cell_content=''
-                    if (j ==0 ){
-                        cell_content = '<a href="' + data[i]['url']+'" target="_blank" >'+data[i][columns[j]]+'</a>' ;
-                    }
-                    else
-                    {
-                        cell_content=data[i][columns[j]];
-                    }
-                    td.innerHTML = cell_content;
-                    bRow.appendChild(td);
+
+            var bRow = document.createElement("tr"); // CREATE ROW FOR EACH RECORD .
+            for (var j = 0; j < columns.length; j++) {
+                var td = document.createElement("td");
+                let cell_content = ''
+                if (j == 0) {
+                    cell_content = '<a href="' + data[i]['url'] + '" target="_blank" >' + data[i][columns[j]] + '</a>';
+                } else {
+                    cell_content = data[i][columns[j]];
                 }
-                tBody.appendChild(bRow)
+                td.innerHTML = cell_content;
+                bRow.appendChild(td);
+            }
+            tBody.appendChild(bRow)
         }
-        table.appendChild(tBody);	
-        
+        table.appendChild(tBody);
+
     }
     var caption = document.createElement('CAPTION');
-    var t = document.createTextNode('Displayed ' + noOfRecords +' articles  with ' + sentiment + ' sentiment' );
-    caption.setAttribute('caption-side','top');
-    caption.setAttribute('text-align','center')
+    var t = document.createTextNode('Displayed ' + noOfRecords + ' articles  with ' + sentiment + ' sentiment');
+    caption.setAttribute('caption-side', 'top');
+    caption.setAttribute('text-align', 'center')
     caption.appendChild(t);
     table.insertBefore(caption, table.childNodes[0]);
 
@@ -117,13 +114,16 @@ async function getnews() {
         //const url = '/news_data/?date=${selectedDate}&category=${selectedCategory}&sentiment=${selectedSentiment}';
     const url = buildUrl('/news_data/', parameters);
     newsdata = await d3.json(url);
+    buildWordCloud(newsdata['image']);
+    generateDynamicTable(newsdata['news'], selectedSentiment, ['title', 'summary', 'source'], ['Title', 'Article Summary', 'Source'])
+        // tabulate(newsdata, ['title',  'summary', 'source'])
+}
 
-    generateDynamicTable(newsdata, selectedSentiment,['title',  'summary', 'source'],['Title','Article Summary','Source'])
-
-    // tabulate(newsdata, ['title',  'summary', 'source'])
-
-
-
+function buildWordCloud(wordimage) {
+    var img = document.createElement('img');
+    img.src = 'data:image/jpeg;base64,' + wordimage;
+    div = d3.select("#word_cloud_img").node();
+    div.appendChild(img);
 }
 
 function loadSentiment() {

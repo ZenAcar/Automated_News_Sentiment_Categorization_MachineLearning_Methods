@@ -5,6 +5,11 @@ import boto3
 import json
 import os
 import psycopg2
+import io
+import base64
+import numpy as np
+from PIL import Image
+from wordcloud import WordCloud, STOPWORDS
 
 from flask import (
     Flask,
@@ -86,6 +91,7 @@ def news_data():
                                 sentiment_results.url,
                                 sentiment_results.articleSummary,
                                 sentiment_results.source,
+                                sentiment_results.description,
                                 sentiment_results.articleSentiment
                                 ).filter(
                                     sentiment_results.category==category,  
@@ -94,6 +100,7 @@ def news_data():
                                 ).limit(int(limit)).all()
 
     news_data = []
+    sentences = ""
     for result in results:
         # print(result[0])
         # print(result[4])
@@ -102,10 +109,24 @@ def news_data():
             'url':result[1],
             'summary':result[2],
             'source':result[3]
-
         })
-        
-    return jsonify(news_data)
+        sentences = sentences + " " + result[4]
+    img_str = ""
+    if len(sentences) > 0 :
+        wordcloud = WordCloud(width = 400, height = 400, 
+                    background_color ='white', 
+                    stopwords = STOPWORDS, 
+                    min_font_size = 10).generate(sentences)
+
+        image = wordcloud.to_image()
+        buffered = io.BytesIO()
+        image.save(buffered, format="JPEG")
+        img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
+
+    # prepare the response: data
+    response_data = {"news": news_data, "image": img_str}
+    return jsonify(response_data)
+    #return jsonify(news_data)
 
 if __name__ == "__main__":
     app.jinja_env.auto_reload = True

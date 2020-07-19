@@ -15,6 +15,7 @@ caption {
     caption-side: top;
 }
 
+
 /* Banner text */
 
 .banner-text {
@@ -44,6 +45,13 @@ caption {
 
 .footer ul li {
     display: inline;
+}
+
+#word_cloud_img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 
 
