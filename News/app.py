@@ -113,9 +113,10 @@ def news_data():
         sentences = sentences + " " + result[4]
     img_str = ""
     if len(sentences) > 0 :
-        wordcloud = WordCloud(width = 400, height = 400, 
+        wordcloud = WordCloud(width = 800, height = 500, 
                     background_color ='white', 
                     stopwords = STOPWORDS, 
+                    collocations=False,
                     min_font_size = 10).generate(sentences)
 
         image = wordcloud.to_image()

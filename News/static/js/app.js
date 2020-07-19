@@ -84,7 +84,7 @@ function generateDynamicTable(data, sentiment, columns, headers) {
 
     }
     var caption = document.createElement('CAPTION');
-    var t = document.createTextNode('Displayed ' + noOfRecords + ' articles  with ' + sentiment + ' sentiment');
+    var t = document.createTextNode('Displaying ' + noOfRecords + ' articles  with ' + sentiment + ' sentiment');
     caption.setAttribute('caption-side', 'top');
     caption.setAttribute('text-align', 'center')
     caption.appendChild(t);
@@ -122,7 +122,9 @@ async function getnews() {
 function buildWordCloud(wordimage) {
     var img = document.createElement('img');
     img.src = 'data:image/jpeg;base64,' + wordimage;
-    div = d3.select("#word_cloud_img").node();
+    div = d3.select('#word_cloud_img').node();
+    var wordcld = document.getElementById('word_cloud_img');
+    while (wordcld.firstChild) wordcld.removeChild(wordcld.firstChild);
     div.appendChild(img);
 }
 

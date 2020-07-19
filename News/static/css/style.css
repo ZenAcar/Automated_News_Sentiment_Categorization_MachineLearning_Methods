@@ -49,9 +49,15 @@ caption {
 
 #word_cloud_img {
     display: block;
+    border-style: solid;
+    border-color: black;
+    border-width: medium;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+}
+
+#contNews {
+    display: inline-block;
 }
 
 
