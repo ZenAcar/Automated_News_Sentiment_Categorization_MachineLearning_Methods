@@ -29,39 +29,68 @@ function buildUrl(url, parameters) {
     return url;
 }
 
-function tabulate(data, columns) {
-    d3.selectAll("table").remove();
-    var table = d3.select('#contNews').append('table')
-    var thead = table.append('thead')
-    var tbody = table.append('tbody');
 
-    // append the header row
-    thead.append('tr')
-        .selectAll('th')
-        .data(columns).enter()
-        .append('th')
-        .text(function(column) { return column; });
-
-    // create a row for each object in the data
-    var rows = tbody.selectAll('tr')
-        .data(data)
-        .enter()
-        .append('tr');
-
-    // create a cell in each row for each column
-    var cells = rows.selectAll('td')
-        .data(function(row) {
-            return columns.map(function(column) {
-                return { column: column, value: row[column] };
-            });
-        })
-        .enter()
-        .append('td')
-        .text(function(d) { return d.value; });
-
-    return table;
+function generateDynamicTable(data, columns,headers){
+	
+    var noOfRecords = data.length;
+    
+    if(noOfRecords>0){
+        // CREATE DYNAMIC TABLE.
+        d3.select('#contNews').selectAll("table").remove(); // Only remove tables under conNews
+        var table = document.createElement("table");        
+        table.style.width = '80%';
+        table.setAttribute('border', '1');
+        table.setAttribute('cellspacing', '0');
+        table.setAttribute('cellpadding', '5');
+      
+        // CREATE TABLE HEAD .
+        var tHead = document.createElement("thead");	
+        // CREATE ROW FOR TABLE HEAD .
+        var hRow = document.createElement("tr");
+        
+        // ADD COLUMN HEADER TO ROW OF TABLE HEAD.
+        for (var i = 0; i < headers.length; i++) {
+                var th = document.createElement("th");
+                if (i < headers.length -1){
+                th.setAttribute('width','45%')
+                }
+                else{
+                    th.setAttribute('width','10%')
+                }
+                th.innerHTML = headers[i];
+                hRow.appendChild(th);
+        }
+        tHead.appendChild(hRow);
+        table.appendChild(tHead);		
+		// CREATE TABLE BODY .
+        var tBody = document.createElement("tbody");	
+        for (var i = 0; i < noOfRecords; i++) {
+        
+                var bRow = document.createElement("tr"); // CREATE ROW FOR EACH RECORD .
+                for (var j = 0; j < columns.length; j++) {
+                    var td = document.createElement("td");
+                    let cell_content=''
+                    if (j ==0 ){
+                        cell_content = '<a href="' + data[i]['url']+'">'+data[i][columns[j]]+'</a>' ;
+                    }
+                    else
+                    {
+                        cell_content=data[i][columns[j]];
+                    }
+                    td.innerHTML = cell_content;
+                    bRow.appendChild(td);
+                }
+                tBody.appendChild(bRow)
+        }
+        table.appendChild(tBody);	
+        // // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+        // var divContainer = document.getElementById("myContacts");
+        var divContainer = d3.select('#contNews').node()
+         divContainer.innerHTML = "";
+         divContainer.appendChild(table);
+        
+    }	
 }
-
 
 async function getnews() {
     selectedDate = d3.select("#selDate").node().value;
@@ -80,7 +109,9 @@ async function getnews() {
     const url = buildUrl('/news_data/', parameters);
     newsdata = await d3.json(url);
 
-    tabulate(newsdata, ['title', 'url', 'summary', 'source'])
+    generateDynamicTable(newsdata, ['title',  'summary', 'source'],['Title','Article Summary','Source'])
+
+    // tabulate(newsdata, ['title',  'summary', 'source'])
 
 
 
