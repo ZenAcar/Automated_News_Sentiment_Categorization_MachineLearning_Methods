@@ -30,39 +30,40 @@ function buildUrl(url, parameters) {
 }
 
 
-function generateDynamicTable(data, columns,headers){
+function generateDynamicTable(data, sentiment, columns,headers){
 	
     var noOfRecords = data.length;
+    d3.select('#contNews').selectAll("table").remove(); // Only remove tables under conNews    
+
+    var table = document.createElement("table");        
+    table.style.width = '80%';
+    table.setAttribute('border', '1');
+    table.setAttribute('cellspacing', '0');
+    table.setAttribute('cellpadding', '5');
+
+    // CREATE TABLE HEAD .
+    var tHead = document.createElement("thead");	
+    // CREATE ROW FOR TABLE HEAD .
+    var hRow = document.createElement("tr");
     
+    // ADD COLUMN HEADER TO ROW OF TABLE HEAD.
+    for (var i = 0; i < headers.length; i++) {
+            var th = document.createElement("th");
+            if (i < headers.length -1){
+            th.setAttribute('width','45%')
+            }
+            else{
+                th.setAttribute('width','10%')
+            }
+            th.innerHTML = headers[i];
+            hRow.appendChild(th);
+    }
+    tHead.appendChild(hRow);
+    table.appendChild(tHead);		
+        // CREATE TABLE BODY .
     if(noOfRecords>0){
-        // CREATE DYNAMIC TABLE.
-        d3.select('#contNews').selectAll("table").remove(); // Only remove tables under conNews
-        var table = document.createElement("table");        
-        table.style.width = '80%';
-        table.setAttribute('border', '1');
-        table.setAttribute('cellspacing', '0');
-        table.setAttribute('cellpadding', '5');
-      
-        // CREATE TABLE HEAD .
-        var tHead = document.createElement("thead");	
-        // CREATE ROW FOR TABLE HEAD .
-        var hRow = document.createElement("tr");
-        
-        // ADD COLUMN HEADER TO ROW OF TABLE HEAD.
-        for (var i = 0; i < headers.length; i++) {
-                var th = document.createElement("th");
-                if (i < headers.length -1){
-                th.setAttribute('width','45%')
-                }
-                else{
-                    th.setAttribute('width','10%')
-                }
-                th.innerHTML = headers[i];
-                hRow.appendChild(th);
-        }
-        tHead.appendChild(hRow);
-        table.appendChild(tHead);		
-		// CREATE TABLE BODY .
+            // CREATE DYNAMIC TABLE.
+            
         var tBody = document.createElement("tbody");	
         for (var i = 0; i < noOfRecords; i++) {
         
@@ -83,13 +84,21 @@ function generateDynamicTable(data, columns,headers){
                 tBody.appendChild(bRow)
         }
         table.appendChild(tBody);	
-        // // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
-        // var divContainer = document.getElementById("myContacts");
-        var divContainer = d3.select('#contNews').node()
-         divContainer.innerHTML = "";
-         divContainer.appendChild(table);
         
-    }	
+    }
+    var caption = document.createElement('CAPTION');
+    var t = document.createTextNode('Displayed ' + noOfRecords +' articles  with ' + sentiment + ' sentiment' );
+    caption.setAttribute('caption-side','top');
+    caption.setAttribute('text-align','center')
+    caption.appendChild(t);
+    table.insertBefore(caption, table.childNodes[0]);
+
+
+    // // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+    // var divContainer = document.getElementById("myContacts");
+    var divContainer = d3.select('#contNews').node()
+    divContainer.innerHTML = "";
+    divContainer.appendChild(table);
 }
 
 async function getnews() {
@@ -109,7 +118,7 @@ async function getnews() {
     const url = buildUrl('/news_data/', parameters);
     newsdata = await d3.json(url);
 
-    generateDynamicTable(newsdata, ['title',  'summary', 'source'],['Title','Article Summary','Source'])
+    generateDynamicTable(newsdata, selectedSentiment,['title',  'summary', 'source'],['Title','Article Summary','Source'])
 
     // tabulate(newsdata, ['title',  'summary', 'source'])
 

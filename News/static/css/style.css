@@ -7,6 +7,13 @@
     font-family: Lucida Console, Courier, monospace;
 }
 
+caption {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    color: #6c757d;
+    text-align: center;
+    caption-side: top;
+}
 
 /* Banner text */
 
