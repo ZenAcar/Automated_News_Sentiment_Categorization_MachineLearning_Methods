@@ -36,13 +36,14 @@ function generateDynamicTable(data, sentiment, columns, headers) {
     d3.select('#contNews').selectAll("table").remove(); // Only remove tables under conNews    
 
     var table = document.createElement("table");
-    table.style.width = '80%';
+    table.style.width = '100%';
     table.setAttribute('border', '1');
     table.setAttribute('cellspacing', '0');
     table.setAttribute('cellpadding', '5');
 
     // CREATE TABLE HEAD .
     var tHead = document.createElement("thead");
+    tHead.setAttribute('background-color', 'limegreen');
     // CREATE ROW FOR TABLE HEAD .
     var hRow = document.createElement("tr");
 

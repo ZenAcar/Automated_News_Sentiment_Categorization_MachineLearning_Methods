@@ -14,47 +14,63 @@
 
 <body class="text-dark" style="background-color: white;">
     <!-- Jumbotron -->
-    <div class="jumbotron text-center" style="background-image:url({{url_for('static', filename='image/newspaper_image.jpg')}}); height: 250; background-position: center; background-size: cover;">
+    <div class="jumbotron text-center" style="background-image:url({{url_for('static', filename='image/newspaper_image.jpg')}}); height: 400px; background-position: center; background-size: cover;">
         <h1 class="display-3 banner-text"><b>News Your Way</b></h1>
         <h4 class="banner-text"> Explore the news your way.<br> Choose sentiment and category.</h4>
     </div>
-    <div class="container-fluid">
-        <!-- Dropdowns -->
-        <div class="row" style="margin: 20px;">
-            <div class="col-md-12 row" style="height: fit-content; width:fit-content">
-                <!-- Sentiment dropdown -->
-                <div class="sentiment">
-                    <h6>Sentiment:</h6>
-                    <select id="selSentiment"></select>
-                </div>
-                <div class="date">
-                    <h6>Date:</h6>
-                    <select id="selDate"></select>
-                </div>
 
-                <!-- Category dropdown -->
-                <div class="category">
-                    <h6>Category:</h6>
-                    <select id="selCategory"></select>
-                </div>
-                <div class="limit">
-                    <h6>Limit:</h6>
-                    <select id="selLimit"></select>
-                </div>
-                <button onclick="getnews()" type="button">Get News!</button>
+
+    <div class="container">
+
+        <!-- Dropdowns -->
+        <div class="col-md-12 row" style="height: fit-content; width:fit-content; margin: 60px;">
+
+            <!-- Sentiment dropdown -->
+            <div class="sentiment dropdown">
+                <h6>Sentiment:</h6>
+                <select id="selSentiment"></select>
+            </div>
+
+            <!-- Date dropdown -->
+            <div class="date dropdown">
+                <h6>Date:</h6>
+                <select id="selDate"></select>
+            </div>
+
+            <!-- Category dropdown -->
+            <div class="category dropdown">
+                <h6>Category:</h6>
+                <select id="selCategory"></select>
+            </div>
+
+            <!-- Limit dropdown -->
+            <div class="limit dropdown">
+                <h6>Limit:</h6>
+                <select id="selLimit"></select>
+            </div>
+
+            <!-- Button -->
+            <div>
+                <button onclick="getnews()" type="button" style="margin-left: 20px;" id="button">Get News!</button>
             </div>
         </div>
+
         <!-- Word Cloud -->
         <div class="row">
-            <div id="word_cloud_img"></div>
+            <div id="word_cloud_img" style="width: min-width; height: min-height; margin-bottom: 50px;"></div>
+        </div>
+        <!-- News Results -->
+        <div class="row" style="text-align: center;">
+            <div id="contNews" style="width: 100%; height: 120%;"></div>
         </div>
     </div>
-    <!-- News Results -->
-    <div class="row" style="text-align: center;">
-        <div id="contNews" style="width: 100%; height: 800px; "></div>
-    </div>
-    </div>
 
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
     <!-- Footer -->
     <footer class="footer">
