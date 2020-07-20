@@ -65,6 +65,10 @@ class sentiment_results(db.Model):
 def home():
     return render_template("index.html")
 
+@app.route("/machinelearning/")
+def ml_model():
+    return render_template("ml_model.html")
+
 @app.route("/news_dates/")
 def news_dates():
     print ("here")
