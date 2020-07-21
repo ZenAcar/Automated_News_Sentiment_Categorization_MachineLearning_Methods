@@ -15,6 +15,10 @@ caption {
     caption-side: top;
 }
 
+.display-3 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 
 /* Banner text */
 
@@ -22,10 +26,14 @@ caption {
     color: whitesmoke;
     padding-top: 30px;
     padding-right: 700px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .btn-md {
     margin-left: 280px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+    text-decoration-color: black;
 }
 
 .row {
@@ -74,17 +82,27 @@ caption {
 #contNews {
     display: inline-table;
     text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #button {
-    background-color: lightseagreen;
+    background-color: #045283;
     color: white;
     padding: 15px 32px;
+    font-size: 16px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 18px;
     border-radius: 12px;
+    margin-left: 20px;
+    margin-top: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.text-details {
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration-color: black;
 }
 
 .h6 {

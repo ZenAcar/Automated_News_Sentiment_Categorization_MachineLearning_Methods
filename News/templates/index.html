@@ -12,12 +12,13 @@
 
 </head>
 
-<body class="text-dark" style="background-color: white;">
+<body class="text-details" style="font-family: Arial, Helvetica, sans-serif">
     <!-- Jumbotron -->
-    <div class="jumbotron" style="background-image:url({{url_for('static', filename='image/newspaper_image.jpg')}}); height: 350px; background-position: center; background-size: cover;">
+    <div class="jumbotron" style="background-image:url({{url_for('static', filename='image/newspaper_image.jpg')}}); height: 375px; background-position: center; background-size: cover;">
         <h1 class="display-3 banner-text text-center"><b>News Your Way</b></h1>
-        <h4 class="banner-text text-center"> Explore the news your way.<br> Choose sentiment and category.</h4>
-        <p><a class="btn btn-md text-dark" style="background-color: white" href="/machinelearning" role="button">Learn more </a></p>
+        <h4 class="banner-text text-center"> Explore the news your way.<br> <br> Choose sentiment and category.</h4>
+        <br>
+        <a class="btn btn-md" href="/machinelearning" role="button">Learn more </a>
     </div>
 
 
@@ -27,31 +28,31 @@
 
             <!-- Sentiment dropdown -->
             <div class="sentiment dropdown">
-                <h6 class="dropdown">Sentiment:</h6>
+                <h6 class="dropdown" style="font-family:Arial, Helvetica, sans-serif;font-weight: bold;">Sentiment</h6>
                 <select id="selSentiment"></select>
             </div>
 
             <!-- Date dropdown -->
             <div class="date dropdown">
-                <h6>Date:</h6>
+                <h6 style="font-family:Arial, Helvetica, sans-serif;font-weight: bold;">Date</h6>
                 <select id="selDate"></select>
             </div>
 
             <!-- Category dropdown -->
             <div class="category dropdown">
-                <h6>Category:</h6>
+                <h6 style="font-family:Arial, Helvetica, sans-serif;font-weight: bold;">Category</h6>
                 <select id="selCategory"></select>
             </div>
 
             <!-- Limit dropdown -->
             <div class="limit dropdown">
-                <h6>Limit:</h6>
+                <h6 style="font-family:Arial, Helvetica, sans-serif;font-weight: bold;">Limit</h6>
                 <select id="selLimit"></select>
             </div>
 
             <!-- Button -->
             <div>
-                <button onclick="getnews()" type="button" style="margin-left: 20px;" id="button">Get News!</button>
+                <button onclick="getnews()" type="button" class="btn btn-sm btn-outline-primary py-0" id="button">Get News!</button>
             </div>
         </div>
         <br>

@@ -11,27 +11,60 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
-<body class="text-dark" style="background-color: white;">
-    <div class="container" style="font-family: Arial, Helvetica, sans-serif;">
-        <div class="row" style="margin: 20px;">
-            <h6>News plays an essential role in our daily life. The goal of this project is to develop an interactive, web-based visual application that delivers top headlines news by sentiment and category, where sentiment is informed by a sentiment detection
-                machine learning model, from news sources around the United States.
-            </h6>
-            <p>The idea behind a sentiment-driven news app is to provide the user, the choice to explore and control the news they consume, classified further by sentiment.
-            </p>
-            <p>The execution of the project is comprised of three parts:</p>
-            <ul>
-                <li> Data Exploration - Collect the latest top headline news articles from around various news sources in United States using News API.</li>
-                <li> Pre Processing - Analyse headline news articles and make use of various Natural Language Processing techniques to pre-process the text.</li>
-                <li>Sentiment Evaluation - The individual news articles are analyzed for sentiment.
-                </li>
-            </ul>
+<body class="text-details">
+    <div class="container-fluid">
+        <div class="row">
+            <br>
+            <div>
+                <h4 style="font-family: Arial, Helvetica, sans-serif;font-weight: bold;"> Details</h4>
+                <hr>
+                <p>News plays an essential role in our daily life. The goal of this project is to develop an interactive, web-based visual application that delivers top headlines news by sentiment and category, where sentiment is informed by a sentiment
+                    detection machine learning model, from news sources around the United States.
+                </p>
+            </div>
+            <div>The idea behind a sentiment-driven news app is to provide the user, the choice to explore and control the news they consume, classified further by sentiment.
+            </div>
+            <div>
+                <br>
+                <h6 style="font-weight: bold;">Sources:</h6>
+                <ul>
+                    <li>Training dataset - <a href="https://www.kaggle.com/rmisra/news-category-dataset">https://www.kaggle.com/rmisra/news-category-dataset</a>
+                    </li>
+                    <li>Testing dataset - <a href="https://newsapi.org/">https://newsapi.org/</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <p>The execution of the project is comprised of the following stages:</p>
+                <ul>
+                    <li> Data Exploration - Collect the latest top headline news articles from around various news sources in United States using News API.</li>
+                    <li> Pre Processing - Make use of various Natural Language Processing techniques such as removing non-alphabetic characters and stop words (a set of very common words like the, a, and, etc.) in the article text and vectorizer to transform
+                        word representations to numerical versions that a model can interpret. Generate a summary of the processed article text using a summarizer.</li>
+                    <li>Model Evaluation and Validation - Employ various Machine Learning models against the training data set, choose a model yielding the best accuracy and use it on the summary generated above to predict the sentiment.
+                    </li>
+                    <li>Create a web application using Python, Flask, a centralized cloud database with AWS for hosting the data, and deploy it on Heroku.</li>
+                </ul>
+            </div>
+            <div style="font-weight: bold;"> Of all the several different machine learning models and classifiers that we tested with, the Support Vector Machine (SVM) model performed the best and yielded higher accuracy scores. </p>
+                <br>
+                <h6 style="font-weight: bold;">Confusion Matrix</h6>
+                <div>
+                    <img src=" {{ url_for( 'static', filename='image/confusion_matrix.png' ) }} " alt="SVM Confusion Matrix ">
+                </div>
+            </div>
+            <div>
+                <h5 style="font-weight: bold;"> Results</h5>
+                <img src=" {{ url_for( 'static', filename='image/news_sentiment.png' ) }} " alt="News Sentiment Analysis" height="100%" , width="75%">
+            </div>
         </div>
     </div>
 </body>
-
+<br>
+<br>
+<br>
+<br>
 <!-- Footer -->
-<footer class="footer">
+<footer class="footer ">
     <div>
         <h6> © Team Data Vizards</h6>
         <ul>
@@ -44,14 +77,14 @@
 </footer>
 
 <!-- D3 JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.js "></script>
 
 <!-- Bootstrap scripts -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
 <!-- Our JavaScript -->
-<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+<script src="{{ url_for( 'static', filename='js/app.js' ) }} "></script>
 </body>
 
 </html>
