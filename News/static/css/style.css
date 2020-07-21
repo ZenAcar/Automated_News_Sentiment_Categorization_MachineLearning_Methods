@@ -4,7 +4,7 @@
 /* All font */
 
 * {
-    font-family: Lucida Console, Courier, monospace;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 caption {
@@ -15,10 +15,6 @@ caption {
     caption-side: top;
 }
 
-.display-3 {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
 
 /* Banner text */
 
@@ -26,14 +22,19 @@ caption {
     color: whitesmoke;
     padding-top: 30px;
     padding-right: 700px;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 .btn-md {
     margin-left: 280px;
-    font-family: Arial, Helvetica, sans-serif;
     background-color: white;
-    text-decoration-color: black;
+    color: black;
+    border-color: black;
+}
+
+.hero {
+    height: 375px;
+    background-position: center;
+    background-size: cover;
 }
 
 .row {
@@ -80,9 +81,15 @@ caption {
 }
 
 #contNews {
-    display: inline-table;
+    display: block;
     text-align: left;
-    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+}
+
+#caption {
+    font-weight: bold;
+    text-align: center;
+    color: black;
 }
 
 #button {
@@ -96,13 +103,6 @@ caption {
     border-radius: 12px;
     margin-left: 20px;
     margin-top: 25px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.text-details {
-    background-color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    text-decoration-color: black;
 }
 
 .h6 {

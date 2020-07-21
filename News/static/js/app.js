@@ -37,7 +37,7 @@ function generateDynamicTable(data, sentiment, columns, headers) {
 
     var table = document.createElement("table");
     table.style.width = '100%';
-    table.setAttribute('border', '1');
+    table.setAttribute('border', '2px solid black');
     table.setAttribute('cellspacing', '0');
     table.setAttribute('cellpadding', '5');
 
@@ -86,8 +86,9 @@ function generateDynamicTable(data, sentiment, columns, headers) {
     }
     var caption = document.createElement('CAPTION');
     var t = document.createTextNode('Displaying ' + noOfRecords + ' articles  with ' + sentiment + ' sentiment');
+    caption.setAttribute('id', 'caption');
     caption.setAttribute('caption-side', 'top');
-    caption.setAttribute('text-align', 'center')
+    caption.setAttribute('text-align', 'center');
     caption.appendChild(t);
     table.insertBefore(caption, table.childNodes[0]);
 
