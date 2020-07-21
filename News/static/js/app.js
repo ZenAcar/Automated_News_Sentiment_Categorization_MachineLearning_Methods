@@ -174,6 +174,8 @@ async function init() {
     loadCategories();
     loadLimit();
     loadnewsDates(newsdates);
+
+    getnews();
 }
 
 init();
