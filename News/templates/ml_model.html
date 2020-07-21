@@ -54,10 +54,12 @@
             </div>
             <div>
                 <h5 style="font-weight: bold;"> Results</h5>
-                <img src=" {{ url_for( 'static', filename='image/news_sentiment.png' ) }} " alt="News Sentiment Analysis" height="100%" , width="75%">
+                <div class="col-md-12">
+                    <img src=" {{ url_for( 'static', filename='image/news_sentiment.png' ) }} " alt="News Sentiment Analysis" height="100%" , width="75%">
+                    <img src=" {{ url_for( 'static', filename='image/top10_news_sources_sentiment.png' ) }} " alt="Top 10 News Sources by Sentiment Analysis" height="100%" , width="60%">
+                </div>
             </div>
         </div>
-    </div>
 </body>
 <br>
 <br>
