@@ -24,6 +24,21 @@ caption {
     padding-right: 700px;
 }
 
+.btn-md {
+    margin-left: 280px;
+}
+
+.row {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.labels {
+    height: fit-content;
+    width: fit-content;
+    margin: auto;
+}
+
 
 /* Footer */
 
@@ -47,10 +62,6 @@ caption {
     display: inline;
 }
 
-.btn-md {
-    margin-top: 25%;
-}
-
 #word_cloud_img {
     display: block;
     border-style: solid;
@@ -61,9 +72,8 @@ caption {
 }
 
 #contNews {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    display: inline-table;
+    text-align: left;
 }
 
 #button {
@@ -77,6 +87,11 @@ caption {
     border-radius: 12px;
 }
 
+.h6 {
+    font-size: bold;
+}
+
 .dropdown {
     padding-left: 15px;
+    text-align: center;
 }

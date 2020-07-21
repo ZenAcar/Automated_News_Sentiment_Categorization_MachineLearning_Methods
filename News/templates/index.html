@@ -14,21 +14,20 @@
 
 <body class="text-dark" style="background-color: white;">
     <!-- Jumbotron -->
-    <div class="jumbotron" style="background-image:url({{url_for('static', filename='image/newspaper_image.jpg')}}); height: 250; background-position: center; background-size: cover;">
+    <div class="jumbotron" style="background-image:url({{url_for('static', filename='image/newspaper_image.jpg')}}); height: 350px; background-position: center; background-size: cover;">
         <h1 class="display-3 banner-text text-center"><b>News Your Way</b></h1>
         <h4 class="banner-text text-center"> Explore the news your way.<br> Choose sentiment and category.</h4>
         <p><a class="btn btn-md text-dark" style="background-color: white" href="/machinelearning" role="button">Learn more </a></p>
     </div>
 
 
-    <div class="container">
-
+    <div class="container-fluid">
         <!-- Dropdowns -->
-        <div class="col-md-12 row" style="height: fit-content; width:fit-content; margin: 60px;">
+        <div class="col-md-12 row labels">
 
             <!-- Sentiment dropdown -->
             <div class="sentiment dropdown">
-                <h6>Sentiment:</h6>
+                <h6 class="dropdown">Sentiment:</h6>
                 <select id="selSentiment"></select>
             </div>
 
@@ -55,7 +54,8 @@
                 <button onclick="getnews()" type="button" style="margin-left: 20px;" id="button">Get News!</button>
             </div>
         </div>
-
+        <br>
+        <br>
         <!-- Word Cloud -->
         <div class="row">
             <div id="word_cloud_img" style="width: min-width; height: min-height; margin-bottom: 50px;"></div>
