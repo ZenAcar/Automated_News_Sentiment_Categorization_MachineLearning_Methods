@@ -47,6 +47,10 @@ caption {
     display: inline;
 }
 
+.btn-md {
+    margin-top: 25%;
+}
+
 #word_cloud_img {
     display: block;
     border-style: solid;

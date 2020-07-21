@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Your Way | News Sentiment</title>
+    <!-- Bootstrap & CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--CSS Link-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="text-dark" style="background-color: white;">
+    <div class="container" style="font-family: Arial, Helvetica, sans-serif;">
+        <div class="row" style="margin: 20px;">
+            <h6>News plays an essential role in our daily life. The goal of this project is to develop an interactive, web-based visual application that delivers top headlines news by sentiment and category, where sentiment is informed by a sentiment detection
+                machine learning model, from news sources around the United States.
+            </h6>
+            <p>The idea behind a sentiment-driven news app is to provide the user, the choice to explore and control the news they consume, classified further by sentiment.
+            </p>
+            <p>The execution of the project is comprised of three parts:</p>
+            <ul>
+                <li> Data Exploration - Collect the latest top headline news articles from around various news sources in United States using News API.</li>
+                <li> Pre Processing - Analyse headline news articles and make use of various Natural Language Processing techniques to pre-process the text.</li>
+                <li>Sentiment Evaluation - The individual news articles are analyzed for sentiment.
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+<!-- Footer -->
+<footer class="footer">
+    <div>
+        <h6> © Team Data Vizards</h6>
+        <ul>
+            <li>Zen Acar | </li>
+            <li> Gina Cameras | </li>
+            <li> Harini Rao | </li>
+            <li> Carlos Santillan </li>
+        </ul>
+    </div>
+</footer>
+
+<!-- D3 JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.js"></script>
+
+<!-- Bootstrap scripts -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!-- Our JavaScript -->
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+
+</html>
